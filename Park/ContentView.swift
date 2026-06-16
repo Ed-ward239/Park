@@ -16,8 +16,10 @@ struct ContentView: View {
     @State private var taglineShown = false
     @State private var buttonShown = false
 
+    /// Home-screen list shows only scans from the last 24 hours, capped at 10.
     private var recentRecords: [ScanRecord] {
-        Array(records.prefix(10))
+        let cutoff = Date().addingTimeInterval(-24 * 60 * 60)
+        return Array(records.filter { $0.timestamp >= cutoff }.prefix(10))
     }
 
     var body: some View {

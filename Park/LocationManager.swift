@@ -3,6 +3,7 @@
 //  Park
 
 import CoreLocation
+import MapKit
 
 @MainActor
 @Observable
@@ -50,8 +51,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         guard let location = locations.last else { return }
         Task { @MainActor in
             self.coordinate = location.coordinate
-            let placemarks = try? await CLGeocoder().reverseGeocodeLocation(location)
-            self.city = placemarks?.first?.locality
+            // iOS 26+: CLGeocoder is deprecated in favour of MapKit's request.
+            if let request = MKReverseGeocodingRequest(location: location) {
+                let mapItems = try? await request.mapItems
+                self.city = mapItems?.first?.placemark.locality
+            }
         }
     }
 

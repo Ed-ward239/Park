@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Park/Assets.xcassets/AppIcon.appiconset/icon-1024.png" width="160" alt="Park app icon">
+</p>
+
 # Park
 
 **Street parking sign decoder.** Point your camera at any parking sign — however many plates are stacked on one pole — and get a single plain-English verdict: *"You can park here until 6 pm today. Free."*
